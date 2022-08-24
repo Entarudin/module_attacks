@@ -4,7 +4,7 @@ from shell_commands_translator import ShellCommandsTranslator
 port = 80
 ip = '192.168.0.1'
 syn_flood_flag = '-S'
-count_packets = 1
+count_packets = 10
 
 
 def check_success_syn_flood_attack(report: str) -> bool:
@@ -13,7 +13,7 @@ def check_success_syn_flood_attack(report: str) -> bool:
     for data in list_report:
         for item in data.split(' '):
             if 'flags' in item:
-                chunks= item.split('=')
+                chunks = item.split('=')
                 flag = chunks[1]
 
     result = True if flag == 'SA' else False
