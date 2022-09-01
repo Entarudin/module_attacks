@@ -1,5 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+venv/
+
 *.py[cod]
 *$py.class
 
@@ -105,7 +107,6 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
 ENV/
 env.bak/
 venv.bak/
@@ -129,3 +130,6 @@ dmypy.json
 .pyre/
 
 .idea/
+
+.output.json
+.pytest.ini
