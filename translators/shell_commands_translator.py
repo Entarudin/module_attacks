@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 
 class ShellCommandTranslator:
@@ -8,11 +8,12 @@ class ShellCommandTranslator:
             port_id: str,
             protocol: str,
             type_attack: Literal["syn_flood", "udp_flood"],
-    ) -> str:
-        if type_attack == 'syn_flood':
-            return self.__to_shell_syn_flood_attack(ip_address, port_id, count_packets=5)
-        if type_attack == 'udp_flood':
-            return self.__to_shell_udp_flood_attack(ip_address, port_id, count_packets=5)
+    ) -> Optional[str]:
+        type_to_func_mapping = {
+            "syn_flood": self.__to_shell_syn_flood_attack,
+            "udp_flood": self.__to_shell_udp_flood_attack,
+        }
+        return type_to_func_mapping[type_attack](ip_address, port_id, count_packets=5)
 
     def __to_shell_syn_flood_attack(
             self,

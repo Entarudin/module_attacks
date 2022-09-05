@@ -6,6 +6,9 @@ from structure import (
     target_service
 )
 
+UDP_FLOOD = 'udp_flood'
+SYN_FLOOD = 'syn_flood'
+
 
 def main():
     data = json_service.parse_in_dict('data.json')
@@ -15,8 +18,8 @@ def main():
     targets_tcp = target_service.cast_hosts_in_targets(network_with_ports.tcp_hosts)
     targets_udp = target_service.cast_hosts_in_targets(network_with_ports.udp_hosts)
 
-    tcp_attacks = attack_service.create_attacks(targets_tcp, 'syn_flood')
-    upd_attacks = attack_service.create_attacks(targets_udp, 'udp_flood')
+    tcp_attacks = attack_service.create_attacks(targets_tcp, SYN_FLOOD)
+    upd_attacks = attack_service.create_attacks(targets_udp, UDP_FLOOD)
 
     for item in upd_attacks:
         print(item.target.ip_address, item.target.status, item.target.port_id, item.status, item.contex)
