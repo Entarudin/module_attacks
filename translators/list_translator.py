@@ -8,3 +8,11 @@ class ListTranslator:
             for item
             in items
         ]
+
+    def to_dict(self, items: list) -> list:
+        return [
+            self.item_translator.to_dict(item)
+            for item
+            in items
+        ]
+

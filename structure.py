@@ -4,6 +4,8 @@ from translators import (
     NetworkTranslator,
     ShellCommandTranslator,
     ListTranslator,
+    AttackTranslator,
+    TargetTranslator
 )
 
 from services import (
@@ -27,7 +29,11 @@ network_service = NetworkService()
 shell_command_translator = ShellCommandTranslator()
 invoker_shell_command_service = InvokerShellCommandService()
 
-json_service = JsonService()
+target_translator = TargetTranslator()
+attack_translator = AttackTranslator(target_translator)
+attacks_translator = ListTranslator(attack_translator)
+
+json_service = JsonService(attacks_translator)
 target_service = TargetService()
 result_attack_service = ResultAttackService()
 

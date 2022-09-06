@@ -21,8 +21,7 @@ def main():
     tcp_attacks = attack_service.create_attacks(targets_tcp, SYN_FLOOD)
     upd_attacks = attack_service.create_attacks(targets_udp, UDP_FLOOD)
 
-    for item in upd_attacks:
-        print(item.target.ip_address, item.target.status, item.target.port_id, item.status, item.contex)
+    json_service.write_in_file('result.json', tcp_attacks, upd_attacks)
 
 
 if __name__ == '__main__':
