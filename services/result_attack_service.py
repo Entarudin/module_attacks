@@ -16,7 +16,7 @@ class ResultAttackService:
             if "ICMP Port Unreachable" in data:
                 list_icmp_responses.append(data)
 
-        return len(list_icmp_responses) != 0
+        return len(list_icmp_responses) == 0
 
     def check_status_attack(self, type_attack: str, report: str) -> bool:
         type_to_func_mapping = {
