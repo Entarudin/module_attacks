@@ -4,3 +4,4 @@ from .network_service import NetworkService
 from .json_service import JsonService
 from .target_service import TargetService
 from .result_attack_service import ResultAttackService
+from .scapy_service import ScapyService
