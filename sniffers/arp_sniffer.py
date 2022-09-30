@@ -1,7 +1,7 @@
 from scapy.all import sniff
 
 
-class SnifferArp:
+class ArpSniffer:
     def __init__(self):
         self.ip_mac_dict = {}
         self.status_attacks = []
@@ -33,6 +33,6 @@ class SnifferArp:
 
 
 def do_arp_sniffer(condition_container: dict):
-    arp_sniffer = SnifferArp()
+    arp_sniffer = ArpSniffer()
     sniff(count=30, filter="arp", store=1, prn=arp_sniffer.packet_sniff)
     condition_container["condition_sniffer"] = arp_sniffer.get_status_arp_spoofing()
