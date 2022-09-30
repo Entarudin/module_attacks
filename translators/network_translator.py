@@ -23,5 +23,3 @@ class NetworkTranslator:
 
     def __get_key(self, json, key: Literal["ip", "current_network_interface"]):
         return json.get(f"{key}", {})
-
-

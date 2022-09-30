@@ -15,4 +15,3 @@ class ListTranslator:
             for item
             in items
         ]
-
