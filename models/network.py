@@ -7,5 +7,5 @@ class Network:
         self.udp_hosts: Optional[Hosts] = None
         self.tcp_hosts: Optional[Hosts] = None
         self.ip_hosts: Optional[Hosts] = None
-        self.current_ip_address: Optional[str] = None
-        self.current_networks_interface: Optional[str] = None
+        self.current_ip_address: Optional[str] = None  # Who it's owner?
+        self.current_networks_interface: Optional[str] = None  # networkS?
