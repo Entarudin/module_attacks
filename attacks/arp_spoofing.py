@@ -2,7 +2,7 @@ from multiprocessing import Manager
 from threading import Thread
 import time
 from time import sleep
-from scapy.all import (Ether, ARP, srp, send)
+from scapy.all import Ether, ARP, srp, send
 
 
 class ArpSpoofing:
@@ -126,7 +126,7 @@ class ArpSpoofingError(Exception):
         self.text = Error
         super().__init__(self.name, self.text)
 
-
+# You write OOP-code? What is IT?
 def do_arp_spoofing(shared_memory, ip_target=str, ip_gateway=str, verbose=bool):
     arp_attack = ArpSpoofing(ip_target, ip_gateway, verbose)
     try:
