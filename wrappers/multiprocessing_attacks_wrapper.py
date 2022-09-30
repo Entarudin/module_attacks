@@ -1,5 +1,4 @@
 from multiprocessing import Process, Manager
-
 from attacks import do_arp_spoofing
 from sniffers import do_arp_sniffer
 from time import sleep
@@ -22,10 +21,12 @@ class MultiprocessingAttacksWrapper:
 
         while True:
             sleep(3)
-            if shared_dict.get("condition_sniffer"):
-                print(shared_dict)
-                arp_sniffer_process.kill()
-                print("kill sniffer process")
-                arp_spoofing_process.kill()
-                print("kill arp_spoofing process")
-                return shared_dict.get("condition_sniffer")
+            if not shared_dict.get("condition_sniffer"):
+                continue
+
+            print(shared_dict)
+            arp_sniffer_process.kill()
+            print("kill sniffer process")
+            arp_spoofing_process.kill()
+            print("kill arp_spoofing process")
+            return shared_dict.get("condition_sniffer")
