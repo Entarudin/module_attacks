@@ -1,4 +1,12 @@
 class ResultAttackService:
+
+    def check_status_attack(self, type_attack: str, report: str) -> bool:
+        type_to_func_mapping = {
+            "syn_flood": self.__check_success_syn_flood_attack,
+            "udp_flood": self.__check_success_udp_flood_attack,
+        }
+        return type_to_func_mapping[type_attack](report)
+
     def __check_success_syn_flood_attack(self, report: str) -> bool:
         list_report = report.split('\n')[1:]
         flag = ''
@@ -17,10 +25,3 @@ class ResultAttackService:
                 list_icmp_responses.append(data)
 
         return len(list_icmp_responses) == 0
-
-    def check_status_attack(self, type_attack: str, report: str) -> bool:
-        type_to_func_mapping = {
-            "syn_flood": self.__check_success_syn_flood_attack,
-            "udp_flood": self.__check_success_udp_flood_attack,
-        }
-        return type_to_func_mapping[type_attack](report)
