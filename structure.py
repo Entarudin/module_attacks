@@ -12,14 +12,14 @@ from translators import (
 from services import (
     InvokerShellCommandService,
     NetworkService,
-    JsonService,
     AttackService,
     TargetService,
     ResultAttackService,
-    ScapyService
 )
 
-from wrappers import MultiprocessingAttacksWrapper
+from repositories import NetworkJsonRepository, AttackJsonRepository
+
+from wrappers import MultiprocessingAttacksWrapper, ScapyWrapper
 
 port_translator = PortTranslator()
 ports_translator = ListTranslator(port_translator)
@@ -41,7 +41,6 @@ attacks_translator = ListTranslator(attack_translator)
 
 arp_translator = ArpTranslator()
 
-json_service = JsonService(attacks_translator)
 target_service = TargetService()
 result_attack_service = ResultAttackService()
 
@@ -56,5 +55,9 @@ attack_service = AttackService(
     multiprocessing_attack_wrapper
 )
 
-scapy_service = ScapyService()
+scapy_wrapper = ScapyWrapper()
+
+network_json_repository = NetworkJsonRepository()
+attack_json_repository = AttackJsonRepository(attacks_translator)
+
 
