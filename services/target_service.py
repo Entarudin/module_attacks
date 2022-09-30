@@ -1,4 +1,4 @@
-from models import Target, Host, Arp
+from models import Target, Host, ArpTableItem
 
 
 class TargetService:
@@ -20,7 +20,7 @@ class TargetService:
         target.protocol = protocol
         return target
 
-    def cast_arp_table_in_targets(self, arp_table: list[Arp]) -> list[Target]:
+    def cast_arp_table_in_targets(self, arp_table: list[ArpTableItem]) -> list[Target]:
         result = []
         for item in arp_table:
             target = self.create_target(
@@ -48,4 +48,3 @@ class TargetService:
                 )
                 result.append(target)
         return result
-

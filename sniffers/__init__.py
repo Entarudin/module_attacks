@@ -1,1 +1,1 @@
-from .sniffer import SnifferArp, do_arp_sniffer
+from .arp_sniffer import ArpSniffer, do_arp_sniffer

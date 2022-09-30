@@ -1,8 +1,8 @@
-from models import Arp
+from models import ArpTableItem
 
 
 class ArpTranslator:
-    def to_dict(self, model: Arp) -> dict:
+    def to_dict(self, model: ArpTableItem) -> dict:
         return {
             "ip_address": model.ip_address,
             "mac_address": model.mac_address,
