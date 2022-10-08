@@ -32,4 +32,4 @@ class ResultAttackService:
         for data in list_report:
             if "target successfully completed" in data:
                 return True
-
+        return False
