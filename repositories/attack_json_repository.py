@@ -9,13 +9,15 @@ class AttackJsonRepository:
     def write_in_file(self, filename: str,
                       tcp_attacks: list[Attack],
                       udp_attacks: list[Attack],
-                      arp_attacks: list[Attack]
+                      arp_attacks: list[Attack],
+                      brute_force_attacks: list[Attack]
                       ) -> None:
         with open(filename, 'w') as json_file:
             presented = {
                 "tcp_attacks": self.attacks_translator.to_dict(tcp_attacks),
                 "udp_attacks": self.attacks_translator.to_dict(udp_attacks),
-                "arp_attacks": self.attacks_translator.to_dict(arp_attacks)
+                "arp_attacks": self.attacks_translator.to_dict(arp_attacks),
+                "brute_force_attacks": self.attacks_translator.to_dict(brute_force_attacks)
             }
 
             json.dump(presented, json_file, indent=2)

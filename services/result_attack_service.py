@@ -4,6 +4,7 @@ class ResultAttackService:
         type_to_func_mapping = {
             "syn_flood": self.__check_success_syn_flood_attack,
             "udp_flood": self.__check_success_udp_flood_attack,
+            "brute_force": self.__check_success_brute_force_attack
         }
         return type_to_func_mapping[type_attack](report)
 
@@ -25,3 +26,10 @@ class ResultAttackService:
                 list_icmp_responses.append(data)
 
         return len(list_icmp_responses) == 0
+
+    def __check_success_brute_force_attack(self, report: str) -> bool:
+        list_report = report.split('\n')
+        for data in list_report:
+            if "target successfully completed" in data:
+                return True
+

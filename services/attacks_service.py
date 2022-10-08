@@ -25,13 +25,14 @@ class AttackService:
             status_port: str,
             service: str,
             protocol: str,
-            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing"],
+            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing", "brute_force"],
             ip_gateway: Optional[str] = None,
     ) -> Attack:
         type_to_func_mapping = {
             "syn_flood": self.__create_attacks_with_shell_commands,
             "udp_flood": self.__create_attacks_with_shell_commands,
-            "arp_spoofing": self.__create_arp_spoofing_attack
+            "arp_spoofing": self.__create_arp_spoofing_attack,
+            "brute_force": self.__create_attacks_with_shell_commands
         }
         return type_to_func_mapping[type_attack](ip_address, mac_address, port_id, status_port,
                                                  service, protocol, type_attack, ip_gateway)
@@ -65,12 +66,12 @@ class AttackService:
             status_port: str,
             service: str,
             protocol: str,
-            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing"],
+            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing", "brute_force"],
             ip_gateway: Optional[str] = None,
     ) -> Attack:
         attack = Attack()
         target = self.target_service.create_target(ip_address, mac_address, port_id, status_port, service, protocol)
-        contex = self.shell_command_translator.to_shell_command_attack(ip_address, port_id, protocol, type_attack)
+        contex = self.shell_command_translator.to_shell_command_attack(ip_address, port_id, service, type_attack)
         result = self.invoker_shell_command_service.invoke_one_command(contex)
         status_attack = self.result_attack_service.check_status_attack(type_attack, result)
         attack.target = target
@@ -87,7 +88,7 @@ class AttackService:
             status_port: str,
             service: str,
             protocol: str,
-            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing"],
+            type_attack: Literal["syn_flood", "udp_flood", "arp_spoofing", "brute_force"],
             ip_gateway: Optional[str] = None,
     ) -> Attack:
         attack = Attack()
