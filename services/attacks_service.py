@@ -1,6 +1,6 @@
 from typing import Literal, Optional
 from models import Attack, Target
-
+from attacks import DhcpStarvationAttack
 
 class AttackService:
     def __init__(
@@ -16,6 +16,19 @@ class AttackService:
         self.target_service = target_service
         self.result_attack_service = result_attack_service
         self.multiprocessing_attack_wrapper = multiprocessing_attack_wrapper
+
+    def create_dhcp_starvation_attack(self, network_interface) -> list[Attack]:
+        result_attack = []
+        dhcp_starvation_attack = DhcpStarvationAttack(network_interface)
+        attack = Attack()
+        target = self.target_service.create_target(ip_address=None,mac_address=None,port_id=None,status=None,
+                                                   service=None, protocol = "dhcp")
+        status_attack = dhcp_starvation_attack.get_status_attack()
+        attack.target = target
+        attack.status = status_attack
+
+        result_attack.append(attack)
+        return result_attack
 
     def create_attack(
             self,

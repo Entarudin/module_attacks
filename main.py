@@ -12,6 +12,7 @@ UDP_FLOOD = 'udp_flood'
 SYN_FLOOD = 'syn_flood'
 ARP_SPOOFING = 'arp_spoofing'
 BRUTE_FORCE = 'brute_force'
+DHCP_STARVATION = 'dhcp_starvation'
 
 
 def main():
@@ -32,8 +33,10 @@ def main():
     arp_table = scapy_wrapper.arp_scan(current_ip_address)
     arp_targets = target_service.cast_arp_table_in_targets(arp_table)
     arp_attacks = attack_service.create_attacks(arp_targets, ARP_SPOOFING, ip_gateway)
+    dhcp_stavation_attack = attack_service.create_dhcp_starvation_attack(network.current_networks_interface)
 
-    attack_json_repository.write_in_file('result.json', tcp_attacks, upd_attacks, arp_attacks, brute_force_attacks)
+    attack_json_repository.write_in_file('result.json', tcp_attacks, upd_attacks, arp_attacks, brute_force_attacks,
+                                         dhcp_stavation_attack)
 
 
 if __name__ == '__main__':
