@@ -11,7 +11,9 @@ class AttackJsonRepository:
                       udp_attacks: list[Attack],
                       arp_attacks: list[Attack],
                       brute_force_attacks: list[Attack],
-                      dhcp_stavation_attack: list[Attack]
+                      dhcp_stavation_attack: list[Attack],
+                      dhcp_spoofing_attack: list[Attack]
+
                       ) -> None:
         with open(filename, 'w') as json_file:
             presented = {
@@ -19,7 +21,8 @@ class AttackJsonRepository:
                 "udp_attacks": self.attacks_translator.to_dict(udp_attacks),
                 "arp_attacks": self.attacks_translator.to_dict(arp_attacks),
                 "brute_force_attacks": self.attacks_translator.to_dict(brute_force_attacks),
-                "dhcp_stavation_attack": self.attacks_translator.to_dict(dhcp_stavation_attack)
+                "dhcp_stavation_attack": self.attacks_translator.to_dict(dhcp_stavation_attack),
+                "dhcp_spoofing_attack": self.attacks_translator.to_dict(dhcp_spoofing_attack)
             }
 
             json.dump(presented, json_file, indent=2)

