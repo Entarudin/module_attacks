@@ -9,4 +9,6 @@ sudo apt-get install python3
 sudo apt install python3-pip
 pip install --pre scapy[basic]
 pip install scapy
+pip install PySide6
+pip install qasync
 sudo python3 main.py

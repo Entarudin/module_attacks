@@ -8,7 +8,5 @@ class AttackTranslator:
     def to_dict(self, model: Attack) -> dict:
         return {
             "target": self.target_translator.to_dict(model.target),
-            "contex": model.contex,
-            "result": model.result,
             "status": model.status
         }

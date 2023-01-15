@@ -26,3 +26,4 @@ class AttackJsonRepository:
             }
 
             json.dump(presented, json_file, indent=2)
+
