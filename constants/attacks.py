@@ -1,0 +1,6 @@
+UDP_FLOOD = 'udp_flood'
+SYN_FLOOD = 'syn_flood'
+ARP_SPOOFING = 'arp_spoofing'
+BRUTE_FORCE = 'brute_force'
+DHCP_STARVATION = 'dhcp_starvation'
+DHCP_SPOOFING = 'dhcp_spoofing'

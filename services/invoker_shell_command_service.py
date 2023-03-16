@@ -1,4 +1,4 @@
-from shell_commands_executor import ShellCommandsExecutor
+from classes import ShellCommandsExecutor
 
 
 class InvokerShellCommandService:

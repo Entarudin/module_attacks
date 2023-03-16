@@ -1,7 +1,7 @@
 from multiprocessing import Process, Manager
 from attacks import do_arp_spoofing, DhcpSpoofing
 from sniffers import do_arp_sniffer, DhcpSniffer
-from dhcp_sends_packets import DhcpSendsPackets
+from classes.dhcp_sends_packets import DhcpSendsPackets
 from time import sleep
 
 

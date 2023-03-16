@@ -16,8 +16,14 @@ from services import (
     ResultAttackService,
     JsonService
 )
-from repositories import NetworkJsonRepository, AttackJsonRepository
-from wrappers import MultiprocessingAttacksWrapper, ScapyWrapper
+from repositories import (
+    NetworkJsonRepository,
+    AttackJsonRepository
+)
+from wrappers import (
+    MultiprocessingAttacksWrapper,
+    ScapyWrapper
+)
 
 port_translator = PortTranslator()
 ports_translator = ListTranslator(port_translator)

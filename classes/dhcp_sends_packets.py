@@ -13,7 +13,7 @@ class DhcpSendsPackets:
 
     def send_dhcp_discover_packet(self):
         discover_packet = self.build_discover_packet()
-        for item in range(0,10):
+        for item in range(0,2):
             import time
             time.sleep(1)
             sendp(discover_packet, iface=self.network_interface)

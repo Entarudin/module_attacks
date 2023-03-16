@@ -30,5 +30,7 @@ class HostTranslator:
 
     def __translate_ports(self, model: Host, json: dict) -> Host:
         json_ports_collection = json.get("ports", {}).get("port", [])
+        if isinstance(json_ports_collection, dict):
+            json_ports_collection = [json_ports_collection]
         model.ports = self.ports_translator.from_json(json_ports_collection)
         return model

@@ -1,5 +1,4 @@
 class ResultAttackService:
-
     def check_status_attack(self, type_attack: str, report: str) -> bool:
         type_to_func_mapping = {
             "syn_flood": self.__check_success_syn_flood_attack,
