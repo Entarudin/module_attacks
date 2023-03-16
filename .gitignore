@@ -133,3 +133,6 @@ dmypy.json
 
 .output.json
 .pytest.ini
+
+hydra.restore
+*.json
