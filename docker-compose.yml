@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  app:
+    build: "."
+    image: "app:latest"
+    restart: "always"
+    container_name: "app"
+    volumes:
+      - "~/app:/opt/app/data"
+    network_mode: "host"
