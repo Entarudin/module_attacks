@@ -9,3 +9,13 @@ all_tests:
 
 check_pep:
 	flake8 ./
+
+down:
+	docker-compose down
+
+build:
+	docker-compose down
+	docker-compose build
+
+up: build
+	docker-compose up -d
